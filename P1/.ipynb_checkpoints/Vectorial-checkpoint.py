@@ -3,7 +3,7 @@ import copy
 import math
 
 
-class LinearReg:
+class LinearReg2:
     """
     Computes the cost function for linear regression.
 
@@ -31,7 +31,7 @@ class LinearReg:
     """
 
     def f_w_b(self, x):
-        return self.w * x + self.b
+        return np.dot(self.x,self.w) + self.b
 
     """
     Computes the cost function for linear regression.
@@ -43,8 +43,7 @@ class LinearReg:
 
     def compute_cost(self):
         sum = 0
-        for i in range(len(self.y)):
-            sum += (self.y[i] - self.f_w_b(self.x[i])) ** 2
+        sum =np.sum((self.y - self.f_w_b(self.x)) ** 2)
         total_cost = sum / (2 * len(self.y))
         return total_cost
 
@@ -61,15 +60,15 @@ class LinearReg:
         dj_dw = 0
         dj_db = 0
         sum = 0
-        for i in range(len(self.y)):
-            fwb = self.f_w_b(self.x[i])
-            sum += (fwb - self.y[i]) * self.x[i]
+        sum = np.sum((self.f_w_b(self.x) - self.y) * self.x)
+        
         dj_dw = sum / (len(self.y))
         
         sum = 0
-        for i in range(len(self.y)):
-            sum += (self.f_w_b(self.x[i]) - self.y[i])
+
+        sum = np.sum(self.f_w_b(self.x) - self.y)
         dj_db = sum / (len(self.y))
+
         return dj_dw, dj_db
 
     """
@@ -97,10 +96,8 @@ class LinearReg:
         for i in range(num_iters):
             j = self.compute_cost()
             J_history.append(j)
-            for j in range(len(self.y)):
-                self.w = self.w - alpha * self.compute_gradient().dj_dw
-                self.b = self.b - alpha * self.compute_gradient().dj_db
-                w_history.append(self.w)
+            self.w = np.dot(-alpha * self.compute_gradient().dj_dw)
+            self.b = np.dot(- alpha * self.compute_gradient().dj_db)
 
         w_initial = copy.deepcopy(self.w)  # avoid modifying global w within function
         b_initial = copy.deepcopy(self.b)  # avoid modifying global b within function
@@ -108,13 +105,13 @@ class LinearReg:
         return self.w, self.b, J_history, w_initial, b_initial
 
 
-def cost_test_obj(x, y, w_init, b_init):
-    lr = LinearReg(x, y, w_init, b_init)
+def cost_test_obj2(x, y, w_init, b_init):
+    lr = LinearReg2(x, y, w_init, b_init)
     cost = lr.compute_cost()
     return cost
 
 
-def compute_gradient_obj(x, y, w_init, b_init):
-    lr = LinearReg(x, y, w_init, b_init)
+def compute_gradient_obj2(x, y, w_init, b_init):
+    lr = LinearReg2(x, y, w_init, b_init)
     dw, db = lr.compute_gradient()
     return dw, db
