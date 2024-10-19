@@ -119,7 +119,7 @@ start_time = time.time()
 datos = load_data_csv('games-data.csv','score', 'user score')
 test_gradient(datos[0],datos[1])
 test_cost(datos[0],datos[1])
-test_gradient_descent(datos[0],datos[1],0.82628,1.07468)
+test_gradient_descent(datos[0],datos[1],0,0)
 end_time = time.time()
 
 execution_time = end_time - start_time 
@@ -128,7 +128,7 @@ start_time = time.time()
 
 test_gradient2(datos[0],datos[1])
 test_cost2(datos[0],datos[1])
-test_gradient_descent2(datos[0],datos[1],0.82628,1.07468)
+test_gradient_descent2(datos[0],datos[1],0,0)
 end_time = time.time()
 
 execution_time = end_time - start_time 
