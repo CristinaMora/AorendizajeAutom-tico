@@ -46,7 +46,16 @@ class LinearRegMulti(LinearReg2):
         reg_gradient_final = (self.lambda_ / self.m) * self.w
         return reg_gradient_final
 
-
+    def compute_cost(self):
+        base_cost = super().compute_cost()
+        reg_cost = self._regularizationL2Cost()
+        return base_cost + reg_cost
+    
+    def compute_gradient(self):
+        dj_dw, dj_db = super().compute_gradient()
+        reg_gradient = self._regularizationL2Gradient()
+        dj_dw += reg_gradient 
+        return dj_dw, dj_db
 
     
 def cost_test_multi_obj(x,y,w_init,b_init):
