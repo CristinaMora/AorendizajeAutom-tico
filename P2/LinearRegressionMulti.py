@@ -1,9 +1,9 @@
 import numpy as np
 import copy
 import math
+from Vectorial import LinearReg2
 
-
-class LinearRegMulti():
+class LinearRegMulti(LinearReg2):
 
     """
     Computes the cost function for linear regression.
@@ -16,6 +16,7 @@ class LinearRegMulti():
         Determinate the weight of the regularization.
     """
     def __init__(self, x, y,w,b, lambda_):
+        super().__init__()
         self.lambda_ = lambda_
 
 
