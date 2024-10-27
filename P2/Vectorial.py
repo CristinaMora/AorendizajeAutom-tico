@@ -57,18 +57,16 @@ class LinearReg2:
      """
 
     def compute_gradient(self):
-        dj_dw = 0
-        dj_db = 0
-        sum = 0
-        sum = np.sum((self.f_w_b(self.x) - self.y) * self.x)
+        """
+        Calcula los gradientes de w y b para regresión multivariable.
+        """
+        m = self.x.shape[0]
+        predictions = self.f_w_b(self.x)
+        error = predictions - self.y
         
-        dj_dw = sum / (len(self.y))
-        
-        sum = 0
-
-        sum = np.sum(self.f_w_b(self.x) - self.y)
-        dj_db = sum / (len(self.y))
-
+        # Calcular el gradiente de w (debe ser de tamaño (n,))
+        dj_dw = (1 / m) * (self.x.T @ error)  # Usando la transpuesta de x para una suma ponderada en cada característica
+        dj_db = (1 / m) * np.sum(error)       # Gradiente de b
         return dj_dw, dj_db
 
     """
@@ -96,8 +94,9 @@ class LinearReg2:
         for i in range(num_iters):
             j = self.compute_cost()
             J_history.append(j)
-            self.w = np.dot(-alpha * self.compute_gradient().dj_dw)
-            self.b = np.dot(- alpha * self.compute_gradient().dj_db)
+            dj_dw, dj_db = self.compute_gradient() 
+            self.w = self.w - alpha * dj_dw  
+            self.b = self.b - alpha * dj_db  
 
         w_initial = copy.deepcopy(self.w)  # avoid modifying global w within function
         b_initial = copy.deepcopy(self.b)  # avoid modifying global b within function

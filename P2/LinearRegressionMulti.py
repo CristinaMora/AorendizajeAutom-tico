@@ -16,10 +16,25 @@ class LinearRegMulti(LinearReg2):
         Determinate the weight of the regularization.
     """
     def __init__(self, x, y,w,b, lambda_):
-        super().__init__()
+        super().__init__(x,y,w,b)
+        self.m = x.shape[0]  # Número de ejemplos
         self.lambda_ = lambda_
 
 
+
+    """
+    Computes the linear regression function.
+
+    Args:
+        x (ndarray): Shape (m,) Input to the model
+
+    Returns:
+        the linear regression value
+    """
+    
+    def f_w_b(self, x):
+        return np.dot(self.x,self.w) + self.b
+        
     """
     Compute the regularization cost (is private method: start with _ )
     This method will be reuse in the future.
@@ -29,6 +44,7 @@ class LinearRegMulti(LinearReg2):
     """
     
     def _regularizationL2Cost(self):
+       
         w = self.w ** 2
         reg_cost = np.sum(w)
         reg_cost_final = (self.lambda_ / (2 * self.m)) * reg_cost
@@ -43,6 +59,7 @@ class LinearRegMulti(LinearReg2):
     """ 
     
     def _regularizationL2Gradient(self):
+      
         reg_gradient_final = (self.lambda_ / self.m) * self.w
         return reg_gradient_final
 

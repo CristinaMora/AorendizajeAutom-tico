@@ -12,6 +12,7 @@ def cleanData(data):
     data["user score"] = data["user score"].astype(np.float64)
     data["score"] = data["score"] / 10
     data = data.dropna(subset=["score", "user score"])
+    data = data.drop_duplicates()
     return data
 
 
