@@ -4,7 +4,7 @@ from public_test import checkNNGradients,MLP_test_step
 from sklearn.model_selection import train_test_split
 
 
-
+# Pregunta examen, nos da un data sert y nos dice que lo dibujemos ...> Se utiliza PCA
 """
 Test 1 to be executed in Main
 """
