@@ -44,15 +44,20 @@ def load_weights(file):
     theta1, theta2 = weights['Theta1'], weights['Theta2']
     return theta1, theta2
 
+"""
+Implementation of the one hot encoding... You must use OneHotEncoder function of the sklern library. 
+Probably need to use reshape(-1, 1) to change size of the data
+"""
 def one_hot_encoding(Y):
-    YEnc = 0
-    #TO-DO: implements
-    return YEnc
+    oneHotEncoder = OneHotEncoder()
+    YEnc = oneHotEncoder.fit(Y.reshape(-1,1))
+    return YEnc.transform(Y.reshape(-1,1)).toarray()
 
+"""
+Implementation of the accuracy metrics function
+"""
 def accuracy(P,Y):
-	#TO-DO: implements
-	return -1
-
+	return np.mean(P == Y)
 
 ###########################################################################
 # gradient checking
@@ -62,7 +67,6 @@ def debugInitializeWeights(fan_in, fan_out):
     Initializes the weights of a layer with fan_in incoming connections and
     fan_out outgoing connections using a fixed set of values.
     """
-
     W = np.sin(np.arange(1, 1 + (1+fan_in)*fan_out))/10.0
     W = W.reshape(fan_out, 1+fan_in, order='F')
     return W

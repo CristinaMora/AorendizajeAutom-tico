@@ -14,10 +14,18 @@ class MLP:
         epislom (scalar) : random initialization range. e.j: 1 = [-1..1], 2 = [-2,2]...
     """
 
-    def __init__(self,inputLayer,hidenLayer, outputLayer, seed=0, epislom = 0.12):
+    def __init__(self,inputLayer,hiddenLayer, outputLayer, seed=0, epislom = 0.12):
         np.random.seed(seed)
-        ## TO-DO
 
+        theta1 = np.random.uniform(-epislom, epislom, (hiddenLayer, inputLayer + 1))
+        theta2 = np.random.uniform(-epislom, epislom, (outputLayer, hiddenLayer + 1))
+
+        self.epsilon = epislom
+        self.new_trained(theta1,theta2)
+
+        self.inputLayer = inputLayer
+        self.hiddenLayer = hiddenLayer
+        self.outputLayer = outputLayer
         """
     Reset the theta matrix created in the constructor by both theta matrix manualy loaded.
 
@@ -45,8 +53,7 @@ class MLP:
         z (array_like): activation signal received by the layer.
     """
     def _sigmoid(self,z):
-        ##TO-DO
-        return 0
+       return 1 / (1 + np.power(np.e, -z))
 
     """
     Computes de sigmoid derivation of de activation (private)
@@ -55,9 +62,9 @@ class MLP:
         a (array_like): activation received by the layer.
     """   
     def _sigmoidPrime(self,a):
-        ##TO-DO
-        return 0
-
+        sigmoid = self._sigmoid(a)  # Sigmoid function
+        sigmoid_derivative = sigmoid * (1 - sigmoid)
+        return sigmoid_derivative
     """
     Run the feedwordwar neural network step
 
@@ -70,9 +77,17 @@ class MLP:
     z2,z3 (array_like): signal fuction of two last layers
     """
     def feedforward(self,x):
-        a1,a2,a3,z2,z3 = 0
-        ##TO-DO
-        return a1,a2,a3,z2,z3 # devolvemos a parte de las activaciones, los valores sin ejecutar la función de activación
+        m = self._size(x)
+        
+        a1 = np.hstack([np.ones((m, 1)), x])
+       
+        z2 = a1 @ self.theta1.T
+        a2 = np.hstack([np.ones((m, 1)), self._sigmoid(z2)])
+
+        z3 = a2 @ self.theta2.T
+        a3 = self._sigmoid(z3)
+
+        return a1, a2, a3, z2, z3
 
 
     """
@@ -87,12 +102,11 @@ class MLP:
 	------
 	J (scalar): the cost.
     """
-    def compute_cost(self, yPrime,y, lambda_): # es una función interna por eso empieza por _
-        ##TO-DO
-        J = 0
+    def compute_cost(self, yPrime,y, lambda_): 
+        m = self._size(yPrime)
+        J = -np.sum(np.sum(y * np.log(yPrime) + (1 - y) * np.log(1 - yPrime)))/m
+        J += self._regularizationL2Cost(m,lambda_)
         return J
-    
-
     """
     Get the class with highest activation value
 
@@ -104,9 +118,7 @@ class MLP:
 	p (scalar): the class index with the highest activation value.
     """
     def predict(self,a3):
-        ##TO-DO
-        p = 0
-        return p
+         return np.argmax(a3 ,axis = 1) 
     
 
     """
@@ -123,8 +135,22 @@ class MLP:
     grad1, grad2: the gradient matrix (same shape than theta1 and theta2)
     """
     def compute_gradients(self, x, y, lambda_):
-        ##TO-DO
-        J,grad1,grad2 = 0
+        a1, a2, a3, z2, z3 = self.feedforward(x)
+        # Calculamos el coste sin regularizacion
+        J = self.compute_cost(a3,y,lambda_)
+         
+        m = self._size(x)
+        # Error en la salida
+        error = a3 - y 
+        error_capa_oculta = (error @ self.theta2[:,1:]) * self._sigmoidPrime(z2)
+
+        grad2 = (error.T @ a2) / m  # Gradiente para theta2
+        grad1 = (error_capa_oculta.T @ a1) / m  # Gradiente para theta1
+        
+        # Regularización (sin incluir bias)
+        grad2[:, 1:] += self._regularizationL2Gradient(self.theta2,lambda_,m)
+        grad1[:, 1:] += self._regularizationL2Gradient(self.theta1,lambda_,m)
+
         return (J, grad1, grad2)
     
     """
@@ -140,10 +166,7 @@ class MLP:
 	L2 Gradient value
     """
     def _regularizationL2Gradient(self, theta, lambda_, m):
-        ##TO-DO
-        return 0
-    
-    
+        return  (lambda_ / m) * theta[:, 1:]  
     """
     Compute L2 regularization cost
 
@@ -157,19 +180,29 @@ class MLP:
     """
 
     def _regularizationL2Cost(self, m, lambda_):
-        ##TO-DO
-        return 0
+        # Si en un futuro queremos incluir mas matrices de pesos, tendremos que añadir mas sumatorios.
+        # Si m es <0 el codigo explota
+        reg_cost =  np.sum(np.square(self.theta1[:,1:])) + np.sum(np.square(self.theta2[:,1:])) 
+        reg_cost_final = (lambda_ / (2 * m)) * reg_cost
+        return reg_cost_final
     
-    
+
     def backpropagation(self, x, y, alpha, lambda_, numIte, verbose=0):
         Jhistory = []
         for i in range(numIte):
-            J = 0
-            ##TO-DO: calculate gradients and update both theta matrix
+            # Paso 1: Calcular costo y gradientes
+            J, grad1, grad2 = self.compute_gradients(x, y, lambda_)
+
+            # Paso 2: Actualizar los parámetros theta usando descenso de gradiente
+            self.theta1 -= alpha * grad1
+            self.theta2 -= alpha * grad2
+
+            # Paso 3: Guardar el costo en el historial
+            Jhistory.append(J)
             if verbose > 0 :
-                if i % verbose == 0 or i == (numIte-1):
+                 if i % verbose == 0 or i == (numIte-1):
                     print(f"Iteration {(i+1):6}: Cost {float(J):8.4f}   ")
-        
+
         return Jhistory
     
 
@@ -199,6 +232,6 @@ mlp_backprop_predict 2 to be execute test 2
 def MLP_backprop_predict(X_train,y_train, X_test, alpha, lambda_, num_ite, verbose):
     mlp = MLP(X_train.shape[1],25,y_train.shape[1])
     Jhistory = mlp.backpropagation(X_train,y_train,alpha,lambda_,num_ite,verbose)
-    a3= mlp.feedforward(X_test)[2]
+    a1, a2, a3, z2, z3 = mlp.feedforward(X_test)
     y_pred=mlp.predict(a3)
     return y_pred
