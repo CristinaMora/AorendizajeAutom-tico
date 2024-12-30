@@ -33,7 +33,7 @@ def displayImage(im):
 
 
 
-def     load_data(file):
+def load_data(file):
     data = loadmat(file, squeeze_me=True)
     x = data['X']
     y = data['y']
