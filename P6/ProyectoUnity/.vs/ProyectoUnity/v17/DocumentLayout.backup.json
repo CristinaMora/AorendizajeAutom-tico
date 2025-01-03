@@ -7,20 +7,16 @@
       "RelativeMoniker": "D:0:0:{7F12DA9C-AE72-EEBB-2951-84DE7F17E432}|KartGame.csproj|solutionrelative:assets\\karting\\scripts\\ml-ucm\\mlagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FF3E618C-6AC8-6245-ED15-F49FA2974772}|Assembly-CSharp.csproj|c:\\users\\pablo\\desktop\\aorendizajeautom-tico\\p6\\proyectounity\\assets\\mlmodels\\model.custom.ml.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{FF3E618C-6AC8-6245-ED15-F49FA2974772}|Assembly-CSharp.csproj|solutionrelative:assets\\mlmodels\\model.custom.ml.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F12DA9C-AE72-EEBB-2951-84DE7F17E432}|KartGame.csproj|c:\\users\\pablo\\desktop\\aorendizajeautom-tico\\p6\\proyectounity\\assets\\karting\\scripts\\kartsystems\\arcadekart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7F12DA9C-AE72-EEBB-2951-84DE7F17E432}|KartGame.csproj|C:\\Users\\Pablo\\Desktop\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\assets\\karting\\scripts\\kartsystems\\arcadekart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7F12DA9C-AE72-EEBB-2951-84DE7F17E432}|KartGame.csproj|solutionrelative:assets\\karting\\scripts\\kartsystems\\arcadekart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F12DA9C-AE72-EEBB-2951-84DE7F17E432}|KartGame.csproj|C:\\Users\\Pablo\\Desktop\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\assets\\karting\\scripts\\ml-ucm\\sensor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7F12DA9C-AE72-EEBB-2951-84DE7F17E432}|KartGame.csproj|solutionrelative:assets\\karting\\scripts\\ml-ucm\\sensor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7F12DA9C-AE72-EEBB-2951-84DE7F17E432}|KartGame.csproj|C:\\Users\\Pablo\\Desktop\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\assets\\karting\\scripts\\ml-ucm\\perception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7F12DA9C-AE72-EEBB-2951-84DE7F17E432}|KartGame.csproj|solutionrelative:assets\\karting\\scripts\\ml-ucm\\perception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F12DA9C-AE72-EEBB-2951-84DE7F17E432}|KartGame.csproj|C:\\Users\\Pablo\\Desktop\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\assets\\karting\\scripts\\ml-ucm\\sensor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F12DA9C-AE72-EEBB-2951-84DE7F17E432}|KartGame.csproj|solutionrelative:assets\\karting\\scripts\\ml-ucm\\sensor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,34 +26,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "model.custom.ml.txt",
-              "DocumentMoniker": "C:\\Users\\Pablo\\Desktop\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\Assets\\MLModels\\model.custom.ml.txt",
-              "RelativeDocumentMoniker": "Assets\\MLModels\\model.custom.ml.txt",
-              "ToolTip": "C:\\Users\\Pablo\\Desktop\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\Assets\\MLModels\\model.custom.ml.txt",
-              "RelativeToolTip": "Assets\\MLModels\\model.custom.ml.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2025-01-03T18:53:09.661Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ArcadeKart.cs",
-              "DocumentMoniker": "C:\\Users\\Pablo\\Desktop\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\Assets\\Karting\\Scripts\\KartSystems\\ArcadeKart.cs",
-              "RelativeDocumentMoniker": "Assets\\Karting\\Scripts\\KartSystems\\ArcadeKart.cs",
-              "ToolTip": "C:\\Users\\Pablo\\Desktop\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\Assets\\Karting\\Scripts\\KartSystems\\ArcadeKart.cs",
-              "RelativeToolTip": "Assets\\Karting\\Scripts\\KartSystems\\ArcadeKart.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMBAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-03T18:49:09.994Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -66,23 +36,35 @@
               "RelativeDocumentMoniker": "Assets\\Karting\\Scripts\\ML-UCM\\MLAgent.cs",
               "ToolTip": "C:\\Users\\Pablo\\Desktop\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\Assets\\Karting\\Scripts\\ML-UCM\\MLAgent.cs",
               "RelativeToolTip": "Assets\\Karting\\Scripts\\ML-UCM\\MLAgent.cs",
-              "ViewState": "AgIAAI8AAAAAAAAAAAArwN4AAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAIAAAAAAAAAAAAAwwI8AAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-03T17:27:42.463Z",
+              "WhenOpened": "2025-01-03T12:41:54.899Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
+              "Title": "ArcadeKart.cs",
+              "DocumentMoniker": "C:\\Users\\Pablo\\Desktop\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\Assets\\Karting\\Scripts\\KartSystems\\ArcadeKart.cs",
+              "RelativeDocumentMoniker": "Assets\\Karting\\Scripts\\KartSystems\\ArcadeKart.cs",
+              "ToolTip": "C:\\Users\\Pablo\\Desktop\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\Assets\\Karting\\Scripts\\KartSystems\\ArcadeKart.cs",
+              "RelativeToolTip": "Assets\\Karting\\Scripts\\KartSystems\\ArcadeKart.cs",
+              "ViewState": "AgIAAEMBAAAAAAAAAAAAwE4BAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-03T13:49:58.515Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Perception.cs",
               "DocumentMoniker": "C:\\Users\\Pablo\\Desktop\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\Assets\\Karting\\Scripts\\ML-UCM\\Perception.cs",
               "RelativeDocumentMoniker": "Assets\\Karting\\Scripts\\ML-UCM\\Perception.cs",
               "ToolTip": "C:\\Users\\Pablo\\Desktop\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\Assets\\Karting\\Scripts\\ML-UCM\\Perception.cs",
               "RelativeToolTip": "Assets\\Karting\\Scripts\\ML-UCM\\Perception.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAcwEUAAAAVAAAAAAAAAA==",
+              "ViewState": "AQIAAC0AAAAAAAAAAAAiwEUAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-03T17:27:42.497Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-03T12:41:55.113Z"
             },
             {
               "$type": "Document",
@@ -92,10 +74,9 @@
               "RelativeDocumentMoniker": "Assets\\Karting\\Scripts\\ML-UCM\\Sensor.cs",
               "ToolTip": "C:\\Users\\Pablo\\Desktop\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\Assets\\Karting\\Scripts\\ML-UCM\\Sensor.cs",
               "RelativeToolTip": "Assets\\Karting\\Scripts\\ML-UCM\\Sensor.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-03T17:27:42.498Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-03T12:41:55.116Z"
             }
           ]
         }

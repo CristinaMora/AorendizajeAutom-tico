@@ -138,14 +138,10 @@ public class MLPModel {
 
         for(int i = 0; i < th.Count; ++i) {
             float[,] traspuesta = TransposeMatrix(th[i]);
+            float[] result = MultiplyMatrices(a[i], traspuesta);
             //Debug.Log(th[i].GetLength(0) + " " + th[i].GetLength(1) + "||||" + traspuesta.GetLength(0) + " " + traspuesta.GetLength(1));
-            float[,] matrixA = new float[1, a[i].Length];
-            for (int j = 0; j < a[i].Length; j++)
-            {
-                matrixA[0, j] = a[i][j];
-            }
 
-            z.Add((float[])MultiplyMatrices(matrixA, traspuesta).GetValue(0));
+            z.Add(result);
             z[i] = VectorSuma(z[i], inter[i]);
             a.Add(Sigmoid(z[i]));
         }
@@ -196,29 +192,24 @@ public class MLPModel {
 		return transposed;
 	}
 
-	private float[,] MultiplyMatrices(float[,] a, float[,] b) {
-		int rowsA = a.GetLength(0);
-		int colsA = a.GetLength(1);
+	private float[] MultiplyMatrices(float[] a, float[,] b) {
 		int rowsB = b.GetLength(0);
 		int colsB = b.GetLength(1);
 
-        if (colsA != rowsB) {
-            Debug.Log(rowsA + " " + colsA + "|||" + rowsB + " " + colsB);
+        if (a.Length != colsB) {
             throw new InvalidOperationException("El número de columnas de A debe coincidir con el número de filas de B.");
         }
 
-		float[,] result = new float[rowsA, colsB];
+		float[] result = new float[rowsB];
 
-		for (int i = 0; i < rowsA; i++) {
-			for (int j = 0; j < colsB; j++) {
-				float sum = 0;
-				for (int k = 0; k < colsA; k++)
-				{
-					sum += a[i, k] * b[k, j];
-				}
-				result[i, j] = sum;
+		for (int i = 0; i < rowsB; i++) {
+            float sum = 0;
+            for (int j = 0; j < colsB; j++) {
+	            sum += b[i,j] * a[j];
+			
 			}
-		}
+            result[i] = sum;
+        }
 
 		return result;
 	}
