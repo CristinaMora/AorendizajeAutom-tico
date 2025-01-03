@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class StandarScaler {
     private float[] mean;
@@ -102,10 +104,10 @@ public class MLPModel {
             float[] input = parameters[i].ConvertToFloatArrat();
             float[] a_input = input.Where((value, index) => !indicesToRemove.Contains(index)).ToArray();
             a_input = standarScaler.Transform(a_input);
-            float[] outputs = FeedForward(a_input);
+            var outputs = FeedForward(a_input);
             if(i == 0)
-                Debug.Log(outputs[0] + ","+ outputs[1] + "," + outputs[2]);
-            Labels label = Predict(outputs);
+               Debug.Log("a");
+            Labels label = Predict(outputs.Item1);
             if (label == labels[i])
                 goals++;
         }
@@ -125,35 +127,141 @@ public class MLPModel {
         return a_input;
     }
 
-    // TODO Implement FeedForward
-    public float[] FeedForward(float[] a_input) {
-        float[] activations = a_input;
+	// TODO Implement FeedForward
+	//   public float[] FeedForward(float[] a_input) {
+	//       float[] activations = a_input;
 
-        // Iterar sobre las capas del modelo
-        for (int layer = 0; layer < mlpParameters.GetCoeff().Count; layer++) {
-            float[,] weights = mlpParameters.GetCoeff()[layer];
-            float[] biases = mlpParameters.GetInter()[layer];
-            float[] nextActivations = new float[weights.GetLength(1)];
+	//       // Iterar sobre las capas del modelo
 
-            // Calcular activaciones de la capa actual
-            for (int j = 0; j < nextActivations.Length; j++) {
-                float z = biases[j];
-                for (int i = 0; i < weights.GetLength(0); i++) {
-                    z += activations[i] * weights[i, j];
-                }
-                // Aplicar la función de activación (sigmoide)
-                nextActivations[j] = sigmoid(z);
-            }
-            activations = nextActivations;
-        }
-        return activations;
-    }
+	//       for (int layer = 0; layer < mlpParameters.GetCoeff().Count; layer++) {
+	//           float[,] weights = mlpParameters.GetCoeff()[layer];
+	//           float[] biases = mlpParameters.GetInter()[layer];
+	//           float[] nextActivations = new float[weights.GetLength(1)];
 
-    //TODO: implement the conversion from index to actions. You may need to implement several ways of
-    //transforming the data if you play in different ways. You must take into account how many classes
-    //you have used, and how One Hot Encoder has encoded them and this may vary if you change the training
-    //data.
-    public Labels ConvertIndexToLabel(int index) {
+	//           // Calcular activaciones de la capa actual
+	//           for (int j = 0; j < nextActivations.Length; j++) {
+	//               float z = biases[j];
+	//               for (int i = 0; i < weights.GetLength(0); i++) {
+	//                   z += activations[i] * weights[i, j];
+	//               }
+	//               // Aplicar la función de activación (sigmoide)
+	//               nextActivations[j] = sigmoid(z);
+	//           }
+	//           activations = nextActivations;
+	//       }
+	//       return activations;
+	//}
+	public (List<float[]>, List<float[]>) FeedForward(float[] input)
+	{
+
+		List<float[]> a = new List<float[]>();
+		List<float[]> z = new List<float[]>();
+
+        // Agregar la entrada inicial
+		a.Add(input);
+
+		for (int i = 0; i < mlpParameters.GetCoeff().Count; i++)
+		{
+			float[,] weights = mlpParameters.GetCoeff()[i];
+
+			// Añadir el sesgo como un elemento adicional al vector de activaciones
+			float[] aWithBias = AddBiasUnit(a[i]);
+
+			// Calcular z = a[i] @ weights.T
+			float[] zLayer = new float[weights.GetLength(1)];
+			Debug.Log($"Dimensiones de weights: filas={weights.GetLength(0)}, columnas={weights.GetLength(1)}");
+			Debug.Log($"Tamaño de aWithBias: {aWithBias.Length}");
+			Debug.Log($"Tamaño de zLayer: {zLayer.Length}");
+			for (int j = 0; j < zLayer.Length; j++)
+			{
+                float sum = 0f;
+				for (int k = 0; k < aWithBias.Length - 1; k++)
+				{
+                    float valor1 = aWithBias[k];
+                    float valor2 = weights[k, j];
+
+                    Debug.Log("Valor1 = " + valor1);
+                    Debug.Log("Valor2 = " + valor2);
+					sum +=  valor1 * valor2;
+				}
+				zLayer[j] = sum;
+			}
+			z.Add(zLayer);
+
+			// Calcular la activación aplicando la función sigmoide
+			float[] nextActivation = Sigmoid(zLayer);
+			a.Add(nextActivation);
+		}
+
+		return (a, z);
+	}
+	private float[,] TransposeMatrix(float[,] matrix)
+	{
+		int rows = matrix.GetLength(0);
+		int cols = matrix.GetLength(1);
+		float[,] transposed = new float[cols, rows];
+
+		for (int i = 0; i < rows; i++)
+		{
+			for (int j = 0; j < cols; j++)
+			{
+				transposed[j, i] = matrix[i, j];
+			}
+		}
+
+		return transposed;
+	}
+	private float[,] MultiplyMatrices(float[,] a, float[,] b)
+	{
+		int rowsA = a.GetLength(0);
+		int colsA = a.GetLength(1);
+		int rowsB = b.GetLength(0);
+		int colsB = b.GetLength(1);
+
+		if (colsA != rowsB)
+			throw new InvalidOperationException("El número de columnas de A debe coincidir con el número de filas de B.");
+
+		float[,] result = new float[rowsA, colsB];
+
+		for (int i = 0; i < rowsA; i++)
+		{
+			for (int j = 0; j < colsB; j++)
+			{
+				float sum = 0;
+				for (int k = 0; k < colsA; k++)
+				{
+					sum += a[i, k] * b[k, j];
+				}
+				result[i, j] = sum;
+			}
+		}
+
+		return result;
+	}
+
+	private float[] AddBiasUnit(float[] input)
+	{
+		float[] biasedInput = new float[input.Length + 1];
+		biasedInput[0] = 1f; // Sesgo
+		Array.Copy(input, 0, biasedInput, 1, input.Length);
+		return biasedInput;
+	}
+	// Método para aplicar la función sigmoide a cada elemento de un vector
+	private float[] Sigmoid(float[] z)
+	{
+		float[] result = new float[z.Length];
+		for (int i = 0; i < z.Length; i++)
+		{
+			result[i] = 1f / (1f + (float)Math.Exp(-z[i]));
+		}
+		return result;
+	}
+
+	//TODO: implement the conversion from index to actions. You may need to implement several ways of
+	//transforming the data if you play in different ways. You must take into account how many classes
+	//you have used, and how One Hot Encoder has encoded them and this may vary if you change the training
+	//data.
+	public Labels ConvertIndexToLabel(int index) {
         switch (index) {
             case 0: return Labels.NONE;
             case 1: return Labels.ACCELERATE;
@@ -167,12 +275,18 @@ public class MLPModel {
         }
     }
 
-    public Labels Predict(float[] output) {
-        float max;
-        int index = GetIndexMaxValue(output, out max);
-        Labels label = ConvertIndexToLabel(index);
-        return label;
+   public Labels Predict(List<float[]> activations)
+    {
+        // Tomar la activación de la última capa
+        float[] output = activations[activations.Count - 1];
+
+        // Encontrar el índice del valor máximo (la clase predicha)
+        int predictedIndex = Array.IndexOf(output, output.Max());
+
+        // Convertir el índice a una etiqueta
+        return (Labels)predictedIndex;
     }
+
 
     public int GetIndexMaxValue(float[] output, out float max) {
         max = output[0];
@@ -228,21 +342,33 @@ public class MLAgent : MonoBehaviour {
     }
 
 
+	public KartGame.KartSystems.InputData AgentInput()
+	{
+		perception = GetComponent<Perception>();
 
-    public KartGame.KartSystems.InputData AgentInput() {
-        Labels label = Labels.NONE;
-        switch (model) {
-            case ModelType.MLP:
-                float[] X = this.mlpModel.ConvertPerceptionToInput(perception, this.transform);
-                float[] outputs = this.mlpModel.FeedForward(X);
-                label = this.mlpModel.Predict(outputs);
-                break;
-        }
-        KartGame.KartSystems.InputData input = Record.ConvertLabelToInput(label);
-        return input;
-    }
+		Labels label = Labels.NONE;
+        Debug.Log("Transform = " + transform);
+        Debug.Log("perception= " + perception);
+        Debug.Log("MLP= " + model); 
+        switch (model)
+		{
+			case ModelType.MLP:
+				// Convertir la percepción en entrada para el modelo
+				float[] X = this.mlpModel.ConvertPerceptionToInput(perception, this.transform);
+				// Ejecutar FeedForward y obtener las activaciones finales
+				var (activations, _) = this.mlpModel.FeedForward(X);
+				float[] outputs = activations[activations.Count - 1]; // Salida de la última capa
 
-    public static string TrimpBrackers(string val) {
+				// Realizar predicción
+				label = this.mlpModel.Predict(activations);
+				break;
+		}
+
+		// Convertir la etiqueta predicha en datos de entrada para el kart
+		KartGame.KartSystems.InputData input = Record.ConvertLabelToInput(label);
+		return input;
+	}
+	public static string TrimpBrackers(string val) {
         val = val.Trim();
         val = val.Substring(1);
         val = val.Substring(0, val.Length - 1);
