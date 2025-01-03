@@ -1,0 +1,106 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\AliciaMoraVelasco\\Documents\\GitHub\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7F12DA9C-AE72-EEBB-2951-84DE7F17E432}|KartGame.csproj|c:\\users\\aliciamoravelasco\\documents\\github\\aorendizajeautom-tico\\p6\\proyectounity\\assets\\karting\\scripts\\ml-ucm\\mlagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F12DA9C-AE72-EEBB-2951-84DE7F17E432}|KartGame.csproj|solutionrelative:assets\\karting\\scripts\\ml-ucm\\mlagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F12DA9C-AE72-EEBB-2951-84DE7F17E432}|KartGame.csproj|c:\\users\\aliciamoravelasco\\documents\\github\\aorendizajeautom-tico\\p6\\proyectounity\\assets\\karting\\scripts\\kartsystems\\arcadekart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F12DA9C-AE72-EEBB-2951-84DE7F17E432}|KartGame.csproj|solutionrelative:assets\\karting\\scripts\\kartsystems\\arcadekart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F12DA9C-AE72-EEBB-2951-84DE7F17E432}|KartGame.csproj|C:\\Users\\AliciaMoraVelasco\\Documents\\GitHub\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\assets\\karting\\scripts\\ml-ucm\\perception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F12DA9C-AE72-EEBB-2951-84DE7F17E432}|KartGame.csproj|solutionrelative:assets\\karting\\scripts\\ml-ucm\\perception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F12DA9C-AE72-EEBB-2951-84DE7F17E432}|KartGame.csproj|C:\\Users\\AliciaMoraVelasco\\Documents\\GitHub\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\assets\\karting\\scripts\\ml-ucm\\sensor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F12DA9C-AE72-EEBB-2951-84DE7F17E432}|KartGame.csproj|solutionrelative:assets\\karting\\scripts\\ml-ucm\\sensor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ArcadeKart.cs",
+              "DocumentMoniker": "C:\\Users\\AliciaMoraVelasco\\Documents\\GitHub\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\Assets\\Karting\\Scripts\\KartSystems\\ArcadeKart.cs",
+              "RelativeDocumentMoniker": "Assets\\Karting\\Scripts\\KartSystems\\ArcadeKart.cs",
+              "ToolTip": "C:\\Users\\AliciaMoraVelasco\\Documents\\GitHub\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\Assets\\Karting\\Scripts\\KartSystems\\ArcadeKart.cs",
+              "RelativeToolTip": "Assets\\Karting\\Scripts\\KartSystems\\ArcadeKart.cs",
+              "ViewState": "AQIAADoBAAAAAAAAAAAkwE4BAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-03T13:49:58.515Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MLAgent.cs",
+              "DocumentMoniker": "C:\\Users\\AliciaMoraVelasco\\Documents\\GitHub\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\Assets\\Karting\\Scripts\\ML-UCM\\MLAgent.cs",
+              "RelativeDocumentMoniker": "Assets\\Karting\\Scripts\\ML-UCM\\MLAgent.cs",
+              "ToolTip": "C:\\Users\\AliciaMoraVelasco\\Documents\\GitHub\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\Assets\\Karting\\Scripts\\ML-UCM\\MLAgent.cs",
+              "RelativeToolTip": "Assets\\Karting\\Scripts\\ML-UCM\\MLAgent.cs",
+              "ViewState": "AQIAAG0AAAAAAAAAAAAtwJoAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-03T12:41:54.899Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Perception.cs",
+              "DocumentMoniker": "C:\\Users\\AliciaMoraVelasco\\Documents\\GitHub\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\Assets\\Karting\\Scripts\\ML-UCM\\Perception.cs",
+              "RelativeDocumentMoniker": "Assets\\Karting\\Scripts\\ML-UCM\\Perception.cs",
+              "ToolTip": "C:\\Users\\AliciaMoraVelasco\\Documents\\GitHub\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\Assets\\Karting\\Scripts\\ML-UCM\\Perception.cs",
+              "RelativeToolTip": "Assets\\Karting\\Scripts\\ML-UCM\\Perception.cs",
+              "ViewState": "AQIAAC0AAAAAAAAAAAAiwEUAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-03T12:41:55.113Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Sensor.cs",
+              "DocumentMoniker": "C:\\Users\\AliciaMoraVelasco\\Documents\\GitHub\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\Assets\\Karting\\Scripts\\ML-UCM\\Sensor.cs",
+              "RelativeDocumentMoniker": "Assets\\Karting\\Scripts\\ML-UCM\\Sensor.cs",
+              "ToolTip": "C:\\Users\\AliciaMoraVelasco\\Documents\\GitHub\\AorendizajeAutom-tico\\P6\\ProyectoUnity\\Assets\\Karting\\Scripts\\ML-UCM\\Sensor.cs",
+              "RelativeToolTip": "Assets\\Karting\\Scripts\\ML-UCM\\Sensor.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-03T12:41:55.116Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -104,10 +104,11 @@ public class MLPModel {
             float[] input = parameters[i].ConvertToFloatArrat();
             float[] a_input = input.Where((value, index) => !indicesToRemove.Contains(index)).ToArray();
             a_input = standarScaler.Transform(a_input);
+           
+
             var outputs = FeedForward(a_input);
-            if(i == 0)
-               Debug.Log("a");
-            Labels label = Predict(outputs.Item1);
+             Labels label = Predict(outputs.Item1);
+           
             if (label == labels[i])
                 goals++;
         }
@@ -162,83 +163,35 @@ public class MLPModel {
 
 		for (int i = 0; i < mlpParameters.GetCoeff().Count; i++)
 		{
-			float[,] weights = mlpParameters.GetCoeff()[i];
+            float[,] weights = mlpParameters.GetCoeff()[i];
 
-			// Añadir el sesgo como un elemento adicional al vector de activaciones
-			float[] aWithBias = AddBiasUnit(a[i]);
+            // Añadir el sesgo como un elemento adicional al vector de activaciones
+          
+            float[] aWithBias = AddBiasUnit(a[i]);
 
-			// Calcular z = a[i] @ weights.T
-			float[] zLayer = new float[weights.GetLength(1)];
-			Debug.Log($"Dimensiones de weights: filas={weights.GetLength(0)}, columnas={weights.GetLength(1)}");
-			Debug.Log($"Tamaño de aWithBias: {aWithBias.Length}");
-			Debug.Log($"Tamaño de zLayer: {zLayer.Length}");
-			for (int j = 0; j < zLayer.Length; j++)
-			{
+            // Calcular z = a[i] @ weights.T
+            float[] zLayer = new float[weights.GetLength(1)];
+            for (int j = 0; j < zLayer.Length; j++)
+            {
                 float sum = 0f;
-				for (int k = 0; k < aWithBias.Length - 1; k++)
-				{
+                for (int k = 0; k < aWithBias.Length-1; k++)
+                {
                     float valor1 = aWithBias[k];
                     float valor2 = weights[k, j];
+                    sum += valor1 * valor2;
+                }
+                zLayer[j] = sum;
+            }
+            z.Add(zLayer);
 
-                    Debug.Log("Valor1 = " + valor1);
-                    Debug.Log("Valor2 = " + valor2);
-					sum +=  valor1 * valor2;
-				}
-				zLayer[j] = sum;
-			}
-			z.Add(zLayer);
-
-			// Calcular la activación aplicando la función sigmoide
-			float[] nextActivation = Sigmoid(zLayer);
-			a.Add(nextActivation);
-		}
+            // Calcular la activación aplicando la función sigmoide
+            float[] nextActivation = Sigmoid(zLayer);
+            a.Add(nextActivation);
+        }
 
 		return (a, z);
 	}
-	private float[,] TransposeMatrix(float[,] matrix)
-	{
-		int rows = matrix.GetLength(0);
-		int cols = matrix.GetLength(1);
-		float[,] transposed = new float[cols, rows];
-
-		for (int i = 0; i < rows; i++)
-		{
-			for (int j = 0; j < cols; j++)
-			{
-				transposed[j, i] = matrix[i, j];
-			}
-		}
-
-		return transposed;
-	}
-	private float[,] MultiplyMatrices(float[,] a, float[,] b)
-	{
-		int rowsA = a.GetLength(0);
-		int colsA = a.GetLength(1);
-		int rowsB = b.GetLength(0);
-		int colsB = b.GetLength(1);
-
-		if (colsA != rowsB)
-			throw new InvalidOperationException("El número de columnas de A debe coincidir con el número de filas de B.");
-
-		float[,] result = new float[rowsA, colsB];
-
-		for (int i = 0; i < rowsA; i++)
-		{
-			for (int j = 0; j < colsB; j++)
-			{
-				float sum = 0;
-				for (int k = 0; k < colsA; k++)
-				{
-					sum += a[i, k] * b[k, j];
-				}
-				result[i, j] = sum;
-			}
-		}
-
-		return result;
-	}
-
+	
 	private float[] AddBiasUnit(float[] input)
 	{
 		float[] biasedInput = new float[input.Length + 1];
@@ -279,10 +232,10 @@ public class MLPModel {
     {
         // Tomar la activación de la última capa
         float[] output = activations[activations.Count - 1];
-
+       
         // Encontrar el índice del valor máximo (la clase predicha)
         int predictedIndex = Array.IndexOf(output, output.Max());
-
+        Debug.Log((Labels)predictedIndex);
         // Convertir el índice a una etiqueta
         return (Labels)predictedIndex;
     }
@@ -347,26 +300,30 @@ public class MLAgent : MonoBehaviour {
 		perception = GetComponent<Perception>();
 
 		Labels label = Labels.NONE;
-        Debug.Log("Transform = " + transform);
-        Debug.Log("perception= " + perception);
-        Debug.Log("MLP= " + model); 
+      //  Debug.Log("Transform = " + transform);
+     //   Debug.Log("perception= " + perception);
+      //  Debug.Log("MLP= " + model); 
         switch (model)
 		{
 			case ModelType.MLP:
 				// Convertir la percepción en entrada para el modelo
 				float[] X = this.mlpModel.ConvertPerceptionToInput(perception, this.transform);
+
 				// Ejecutar FeedForward y obtener las activaciones finales
 				var (activations, _) = this.mlpModel.FeedForward(X);
 				float[] outputs = activations[activations.Count - 1]; // Salida de la última capa
 
 				// Realizar predicción
 				label = this.mlpModel.Predict(activations);
-				break;
-		}
+                Debug.Log(label);
+                break;
+        }
 
-		// Convertir la etiqueta predicha en datos de entrada para el kart
-		KartGame.KartSystems.InputData input = Record.ConvertLabelToInput(label);
-		return input;
+        // Convertir la etiqueta predicha en datos de entrada para el kart
+        
+        KartGame.KartSystems.InputData input = Record.ConvertLabelToInput(label);
+       
+        return input;
 	}
 	public static string TrimpBrackers(string val) {
         val = val.Trim();
