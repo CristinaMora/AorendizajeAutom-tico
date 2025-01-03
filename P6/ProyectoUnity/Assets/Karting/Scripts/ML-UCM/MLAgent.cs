@@ -238,44 +238,47 @@ public class MLPModel {
     //you have used, and how One Hot Encoder has encoded them and this may vary if you change the training
     //data.
     public Labels ConvertIndexToLabel(int index) {
-        switch (index) {
-            case 0: return Labels.NONE;
-            case 1: return Labels.ACCELERATE;
-            case 2: return Labels.BRAKE;
-            case 3: return Labels.LEFT_ACCELERATE;
-            case 4: return Labels.RIGHT_ACCELERATE;
-            case 5: return Labels.LEFT_BRAKE;
-            case 6: return Labels.RIGHT_BRAKE;
+        Labels label = Labels.NONE;
 
-            default: return Labels.NONE;
+        switch (index)
+        {
+            case 0:
+                label = Labels.ACCELERATE;
+                break;
+            case 1:
+                label = Labels.LEFT_ACCELERATE;
+                break;
+            case 2:
+                label = Labels.NONE;
+                break;
+            case 3:
+                label = Labels.RIGHT_ACCELERATE;
+                break;
         }
+
+        return label;
     }
 
     public Labels Predict(float[] activations)
     {
-        // Tomar la activación de la última capa
-        float[] output = activations;  // Si activations ya es un float[], no hay necesidad de acceder a la última capa
-
-        // Encontrar el índice del valor máximo en el arreglo de activaciones
-        int predictedIndex = Array.IndexOf(output, output.Max());
-
-        // Convertir el índice al tipo Labels (según el valor máximo)
-        return (Labels)predictedIndex;
+        float max;
+        int index = GetIndexMaxValue(activations, out max);
+        Labels label = ConvertIndexToLabel(index);
+        return label;
     }
 
 
 
-    public int GetIndexMaxValue(float[,] output, out float max) {
-        max = output[0,0];
+    public int GetIndexMaxValue(float[] output, out float max)
+    {
+        max = output[0];
         int index = 0;
-        for (int i = 0; i < output.GetLength(0); i++) {
-            for (int j = 0; i < output.GetLength(1); ++j)
+        for (int i = 1; i < output.Length; i++)
+        {
+            if (output[i] > max)
             {
-                if (output[i, j] > max)
-                {
-                    max = output[i, j];
-                    index = i;
-                }
+                max = output[i];
+                index = i;
             }
         }
         return index;
